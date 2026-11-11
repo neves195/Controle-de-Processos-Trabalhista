@@ -37,3 +37,18 @@ Se o `mysql` estiver no PATH, basta `mysql -u root --default-character-set=utf8m
 | Banco     | `processostrabalhistas` |
 
 Essas são as credenciais padrão do XAMPP e servem apenas para desenvolvimento local.
+
+## Rodando no GitHub Codespaces (sem instalar o XAMPP)
+
+O repositório tem uma pasta `.devcontainer/` que monta automaticamente um ambiente com PHP 8.3 e MariaDB (compatível com o MySQL), com as mesmas credenciais do XAMPP. Assim o `processos.php` roda sem nenhuma alteração.
+
+1. No GitHub, abra o repositório e clique em **Code → Codespaces → Create codespace on main**.
+2. Aguarde a criação (na primeira vez leva alguns minutos). O ambiente importa o `banco.sql` sozinho.
+3. Quando terminar, o navegador abre o sistema. Se não abrir, vá na aba **PORTS** e clique no ícone de globo da porta **8000**.
+
+Observações:
+
+- Para que outra pessoa (ex.: o professor) abra o link, clique com o botão direito na porta 8000, na aba **PORTS**, e escolha **Port Visibility → Public**.
+- O Codespace desliga sozinho depois de um tempo sem uso, e o link só funciona enquanto ele estiver ligado. Ao religar, o banco e o servidor sobem de novo automaticamente, com os dados preservados.
+- Para voltar o banco ao estado inicial (3 processos de exemplo), rode no terminal: `mariadb -u root --default-character-set=utf8mb4 < banco.sql`.
+- O Codespaces consome horas da cota gratuita mensal enquanto está ligado. Ao terminar, pare-o em **github.com/codespaces → ··· → Stop codespace**.

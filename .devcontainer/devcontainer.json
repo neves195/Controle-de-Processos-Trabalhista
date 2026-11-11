@@ -1,0 +1,28 @@
+{
+    "name": "Processos Trabalhistas (PHP + MySQL)",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+
+    // Executado uma vez, ao criar o Codespace: configura o banco e importa o banco.sql
+    "postCreateCommand": "bash .devcontainer/setup.sh",
+
+    // Executado sempre que o Codespace liga: sobe o banco e o servidor PHP
+    "postStartCommand": "bash .devcontainer/start.sh",
+
+    "forwardPorts": [8000],
+    "portsAttributes": {
+        "8000": {
+            "label": "Sistema de Processos",
+            "onAutoForward": "openBrowser"
+        }
+    },
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "bmewburn.vscode-intelephense-client"
+            ]
+        }
+    }
+}
