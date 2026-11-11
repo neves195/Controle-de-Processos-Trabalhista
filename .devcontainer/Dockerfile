@@ -1,8 +1,11 @@
 # Ambiente do Codespaces: PHP 8.3 + MariaDB (compatível com o MySQL do XAMPP)
 FROM mcr.microsoft.com/devcontainers/php:1-8.3-bookworm
 
-# Instala o servidor de banco de dados
-RUN apt-get update \
+# Remove o repositório do Yarn que vem na imagem base: a chave GPG dele
+# está expirada e faz o apt-get update falhar (o projeto não usa Yarn).
+# Depois instala o servidor de banco de dados.
+RUN grep -rl "yarnpkg" /etc/apt/sources.list /etc/apt/sources.list.d/ 2>/dev/null | xargs -r rm -f \
+    && apt-get update \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
        mariadb-server mariadb-client \
     && rm -rf /var/lib/apt/lists/*
